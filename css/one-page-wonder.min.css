@@ -22,12 +22,13 @@ header.masthead .bg-circle-4{height:30rem;width:30rem;top:-5rem;right:35%}
     header.masthead .masthead-content .masthead-heading{font-size:6rem}
     header.masthead .masthead-content .masthead-subheading{font-size:4rem}
 }
-.bg-primary{background-color:#ee0979!important}.btn-primary{background-color:#ee0979;border-color:#ee0979}
-.btn-primary:active,.btn-primary:focus,.btn-primary:hover{background-color:#bd0760!important;border-color:#bd0760!important}
-.btn-primary:focus{box-shadow:0 0 0 .2rem rgba(238,9,121,.5)}
+.bg-primary{background-color:#F8151B!important}.btn-primary{background-color:#F8151B;border-color:#F8151B}
+.btn-primary:active,.btn-primary:focus,.btn-primary:hover{background-color:#BC0E12!important;border-color:#BC0E12!important}
+.btn-primary:focus{box-shadow:0 0 0 .2rem #BC0E12}
 .btn-secondary{background-color:#ff6a00;border-color:#ff6a00}
 .btn-secondary:active,.btn-secondary:focus,.btn-secondary:hover{background-color:#c50!important;border-color:#c50!important}
 .btn-secondary:focus{box-shadow:0 0 0 .2rem rgba(255,106,0,.5)}
 
 /*background:linear-gradient(0deg,#ff6a00 0,#ee0979 100%);*/
 /*background:linear-gradient(0deg,#ee0979 0,#ff6a00 100%)*/
+/* FF58A2 */
