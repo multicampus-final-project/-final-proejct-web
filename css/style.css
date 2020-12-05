@@ -1,0 +1,29 @@
+#move1 > h2 {
+    margin-top: 60px;
+}
+
+#award_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    margin-left: 95px;
+}
+
+
+.award_items {
+    margin-right: 30px;
+    width: auto;
+}
+
+.award_items > h2 {
+    width: 250px
+}
+
+#award_name {
+    margin: 15px auto;
+}
+
+#move2 > div > h2 {
+    margin-top: 50px;
+}
