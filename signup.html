@@ -8,23 +8,65 @@
             <table>
                 <tr>
                     <th>카드 번호</th>
-                    <td><input type="text" name="userName"></td>
+                    <td><input type="text" id="userId" name="userId"></td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
-                    <td><input type="password" name="passWord"></td>
+                    <td><input type="password" id="password" name="password"></td>
                 </tr>
                 <tr>
                     <th>비밀번호 확인</th>
-                    <td><input type="password" name="passWord"></td>
+                    <td><input type="password" id="password2" name="password2"></td>
                 </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" name="email"></td>
+                    <td><input type="text" id="userName" name="userName"></td>
                 </tr>
             </table>
-            <!-- <input type="submit" value="가입" onclick="signUp()"> -->
-            <button onclick="signUp()">가입</button>
+            <input type="button" value="가입하기" id="submit" onclick="redirect();">
         </form>
     </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+    var API_URL = 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/signup';
+    /*
+    * API_URL은 API Gateway에서 API를 배포한 뒤 리소스를 누르면 나오는 URL 을 복붙하시면 됩니다.
+    */
+
+    $(document).ready(function () {
+
+        $('#submit').on('click', function () {
+            $.ajax({
+                type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
+                error: function(xhr, status, error){
+                    console.log(error);
+                },
+                url: API_URL,
+                data: JSON.stringify({
+                    "userid": $('#userId').val(),
+                    "password": $('#password').val(),
+                    "username": $('#userName').val()
+                }),
+                contentType: "application/json",
+                //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
+
+                success: function (data) {
+                    console.log('성공!');
+                    // location.reload();
+                    console.log("success");
+                }
+            });
+        });
+    });
+
+    function redirect()
+    {
+        var delay = 1500; // time in milliseconds
+
+        setTimeout(function(){
+        window.location = "http://127.0.0.1:5500/signin.html";
+        },delay);
+        // window.location.href = "http://127.0.0.1:5500/signin.html";
+    };
+</script>
