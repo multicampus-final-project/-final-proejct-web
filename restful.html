@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <button onclick="test()">click!</button>
+  <!-- <a href="" onclick="test()">click!</a> -->
+  <p class="pp"></p>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+    var getinput = 'Hello js';
+
+    $.ajax({
+        url: 'https://gv2hikvk7k.execute-api.us-east-1.amazonaws.com/dev/resource?myParam='+getinput,
+        type: 'GET'
+    }).done((data, textStatus, jqXHR) => {
+        console.log('성공');
+        console.log(data);
+        console.log(textStatus);
+        console.log(jqXHR);
+        $('.pp').text(data['body']);
+    }).fail((jqXHR, textStatus, errorThrown) => {
+        console.log('실패');
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+    }).always((param1, param2, param3) => {
+        console.log('종료');
+        console.log(param1);
+        console.log(param2);
+        console.log(param3);
+    }).then((data, textStatus, jqXHR) => {
+        console.log('성공 케이스');
+        // var a = $('.pp').get();
+        // $('.pp').text(a+data['body']);
+    }, (jqXHR, textStatus, errorThrown) => {
+        console.log('실패 케이스')
+    });
+
+    // $('.pp').text('title');
+    function test() {
+      $.ajax({
+          url: 'https://gv2hikvk7k.execute-api.us-east-1.amazonaws.com/dev/resource',
+          type: 'POST',
+          data: JSON.stringify({'myParam': 'POST test합니다.'})
+      }).then((data, textStatus, jqXHR) => {
+          alert('success');
+          console.log(data);
+          $('.pp').text(data['body']);
+          
+      }, (jqXHR, textStatus, errorThrown) => {
+          console.log('성공끝');
+      });
+    }
+
+    
+  </script>
+</body>
+</html>
+
