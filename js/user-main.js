@@ -28,8 +28,10 @@
     });
 
     function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+        if($(input).attr('name') == 'userId') {
+            // 회원카드번호는 숫자만 입력할 수 있다
+            // 필드가 비어있거나 숫자값이 입력되지 않은 경우 validate false
+            if($(input).val().trim().match(/^[0-9]/g) == null) {
                 return false;
             }
         }
