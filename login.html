@@ -28,46 +28,65 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				<form class="login100-form validate-form" method="POST">
+				<form class="login100-form validate-form">
 					<span class="login100-form-title p-b-55">
-						Sign up
+						Login
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "필수 입력 필드입니다">
-						<input class="input100" type="text" name="userId" id="userId" placeholder="회원 카드 번호">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
+						<input class="input100" type="text" name="email" placeholder="회원 카드 번호">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-user"></span>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "필수 입력 필드입니다">
-						<input class="input100" type="text" name="userName" id="userName" placeholder="닉네임">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해주세요">
+						<input class="input100" type="password" name="pass" placeholder="비밀번호">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<span class="lnr lnr-heart"></span>
+							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "필수 입력 필드입니다">
-						<input class="input100" type="password" name="password" id="password" placeholder="비밀번호">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "필수 입력 필드입니다">
-						<input class="input100" type="password" name="password2" id="password2" placeholder="비밀번호 확인">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
+					<div class="contact100-form-checkbox m-l-4">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
 					</div>
 					
 					<div class="container-login100-form-btn p-t-25">
-						<input type="button" class="login100-form-btn" value="가입하기" id="submit" onclick="redirect();">
+						<button class="login100-form-btn">
+							로그인
+						</button>
 					</div>
 
+					<!-- <div class="text-center w-full p-t-42 p-b-22">
+						<span class="txt1">
+							Or login with
+						</span>
+					</div>
+
+					<a href="#" class="btn-face m-b-10">
+						<i class="fa fa-facebook-official"></i>
+						Facebook
+					</a>
+
+					<a href="#" class="btn-google m-b-10">
+						<img src="images/icons/icon-google.png" alt="GOOGLE">
+						Google
+					</a> -->
+
+					<div class="text-center w-full p-t-115">
+						<span class="txt1">
+							회원이 아니신가요?
+						</span>
+
+						<a class="txt1 bo1 hov1" href="signup.html">
+							회원가입							
+						</a>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -85,50 +104,6 @@
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="js/user-main.js"></script>
-<!--===============================================================================================-->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script type="text/javascript">
-		var API_URL = 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/signup';
-		/*
-		* API_URL은 API Gateway에서 API를 배포한 뒤 리소스를 누르면 나오는 URL 을 복붙하시면 됩니다.
-		*/
-
-		$(document).ready(function () {
-
-			$('#submit').on('click', function () {
-				$.ajax({
-					type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
-					error: function(xhr, status, error){
-						console.log(error);
-					},
-					url: API_URL,
-					data: JSON.stringify({
-						"userid": $('#userId').val(),
-						"password": $('#password').val(),
-						"username": $('#userName').val()
-					}),
-					contentType: "application/json",
-					//API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
-
-					success: function (data) {
-						console.log('성공!');
-						// location.reload();
-						console.log("success");
-					}
-				});
-			});
-		});
-
-		function redirect()
-		{
-			var delay = 1500; // time in milliseconds
-
-			setTimeout(function(){
-			window.location = "http://127.0.0.1:5500/login.html";
-			},delay);
-			// window.location.href = "http://127.0.0.1:5500/signin.html";
-		};
-	</script>
 </body>
 </html>
