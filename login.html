@@ -34,7 +34,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "올바른 형식이 아닙니다.">
-						<input class="input100" type="text" name="userId" placeholder="회원 카드 번호">
+						<input class="input100" type="text" name="userId" id="userId" placeholder="회원 카드 번호">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-user"></span>
@@ -42,7 +42,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해주세요">
-						<input class="input100" type="password" name="password" placeholder="비밀번호">
+						<input class="input100" type="password" name="password" id="password" placeholder="비밀번호">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
@@ -57,26 +57,8 @@
 					</div>
 					
 					<div class="container-login100-form-btn p-t-25">
-						<button class="login100-form-btn">
-							로그인
-						</button>
+						<input type="button" class="login100-form-btn" value="로그인" id="submit" onclick="redirect()">
 					</div>
-
-					<!-- <div class="text-center w-full p-t-42 p-b-22">
-						<span class="txt1">
-							Or login with
-						</span>
-					</div>
-
-					<a href="#" class="btn-face m-b-10">
-						<i class="fa fa-facebook-official"></i>
-						Facebook
-					</a>
-
-					<a href="#" class="btn-google m-b-10">
-						<img src="images/icons/icon-google.png" alt="GOOGLE">
-						Google
-					</a> -->
 
 					<div class="text-center w-full p-t-115">
 						<span class="txt1">
@@ -104,6 +86,64 @@
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="js/user-main.js"></script>
+<!--===============================================================================================-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		var API_URL = 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/login';
+		/*
+		* API_URL은 API Gateway에서 API를 배포한 뒤 리소스를 누르면 나오는 URL 을 복붙하시면 됩니다.
+		*/
+		document.addEventListener("DOMContentLoaded", function() {
+			if(window.sessionStorage) {
+				sessionStorage.clear();
+			} 
+			else {
+				alert("세션을 사용할 수 없는 브라우저 입니다.");
+			}
+		});
 
+		$(document).ready(function () {
+
+			$('#submit').on('click', function () {
+				$.ajax({
+					type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
+					error: function(xhr, status, error){
+						console.log(error);
+					},
+					url: API_URL,
+					data: JSON.stringify({
+						"userid": $('#userId').val(),
+						"password": $('#password').val()
+					}),
+					contentType: "application/json",
+					//API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
+
+					success: function (data) {
+						if (data['userid'] != "") {
+							console.log('성공!');
+							alert("로그인 성공!");
+							
+							sessionStorage.setItem("userid", data["userid"]);
+							sessionStorage.setItem("username", data["username"]);
+
+						}
+						else{
+							alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
+							location.reload();
+						}
+					}
+				});
+			});
+		});
+
+		function redirect()
+		{
+			var delay = 2500; // time in milliseconds
+
+			setTimeout(function(){
+			window.location = "http://127.0.0.1:5500/index.html";
+			},delay);
+		};
+	</script>
 </body>
 </html>
