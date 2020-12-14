@@ -41,7 +41,8 @@
             <a class="nav-link" onclick="fnMove('2')" href="#">올바른 분리수거 방법</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/login.html">로그인</a>
+            <a class="nav-link" id="login_btn" href="/login.html">로그인</a>
+            <a class="nav-link" id="logout_btn">로그아웃</a>
           </li>
         </ul>
       </div>
@@ -52,9 +53,9 @@
   <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
     <div class="masthead-content">
       <div class="container">
-        <h1 class="masthead-heading mb-0">원종아 님</h1>
-        <h2 class="masthead-subheading mb-0">1040 p</h2>
-        <a href="./iotbutton.html" class="btn btn-primary btn-xl rounded-pill mt-5">포인트 내역 조회</a>
+        <h1 class="masthead-heading mb-0" id="place_username"></h1>
+        <h2 class="masthead-subheading mb-0" id="place_point"></h2>
+        <a href="./iotbutton.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
       </div>
     </div>
   </header>
@@ -114,6 +115,32 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+  var logout_btn = document.getElementById("logout_btn");
+  var login_btn = document.getElementById("login_btn");
+  var username_display = document.getElementById("place_username");
+  var pointCheck_btn = document.getElementById("pointCheck_btn");
+
+  $('#logout_btn').on('click', function () {
+    sessionStorage.clear();
+    location.reload();
+    alert("로그아웃 완료");
+  });
+
+  (function () {
+
+    if (sessionStorage.getItem('userid')){
+      // 로그인 된 상태
+      // 로그인/아웃 버튼 교체, 닉네임 표시
+      logout_btn.style.display = "block";
+      login_btn.style.display = "none";
+      pointCheck_btn.style.display = "inline-block";
+      username_display.innerHTML = sessionStorage.getItem('username');
+    }
+    else {
+      username_display.innerHTML = "로그인 전 페이지";
+    };
+  }());
+
   function fnMove(seq){
           var offset = $("#move" + seq).offset();
           $('html, body').animate({scrollTop : offset.top}, 400);
