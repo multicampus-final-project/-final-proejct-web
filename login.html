@@ -103,7 +103,6 @@
 		});
 
 		$(document).ready(function () {
-
 			$('#submit').on('click', function () {
 				$.ajax({
 					type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
@@ -120,12 +119,11 @@
 
 					success: function (data) {
 						if (data['userid'] != "") {
-							console.log('성공!');
-							alert("로그인 성공!");
-							
 							sessionStorage.setItem("userid", data["userid"]);
 							sessionStorage.setItem("username", data["username"]);
 
+							console.log('성공!');
+							alert("로그인 성공!");
 						}
 						else{
 							alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
@@ -139,7 +137,6 @@
 		function redirect()
 		{
 			var delay = 2500; // time in milliseconds
-
 			setTimeout(function(){
 			window.location = "http://127.0.0.1:5500/index.html";
 			},delay);
