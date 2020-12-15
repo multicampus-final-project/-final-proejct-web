@@ -27,7 +27,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">이리온 Bottle</a>
+      <a class="navbar-brand" href="#">유리온</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -48,28 +48,56 @@
   </nav>
 
   <section id="move1">
-    <h1 style="text-align: center; padding-top: 5rem;">이달의 쓰레기왕</h1>
+    <h1 style="text-align: center; padding-top: 5rem;">분리수거 포인트 내역</h1>
     <section>
       <div class="container" id="award-section">
-        
-          <div class="col-lg-6 order-lg-1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">분리수거 날짜</th>
+              <th scope="col">적립 포인트</th>
+              <!-- <th scope="col">Handle</th> -->
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr> -->
+            <!-- <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr> -->
+          </tbody>
+        </table>
+          <!-- <div class="col-lg-6 order-lg-1">
             <div class="p-5">
               <h2 class="display-4">Britney Jeom-rye</h2>
               <p>영광이네요.</p>
             </div>
-          </div>
-        </div>
+          </div> -->
       </div>
     </section>
 
 
   <!-- Footer -->
-  <footer class="py-5 bg-black">
-    <div class="container">
+  <!-- <footer class="py-5 bg-black"> -->
+    <!-- <div class="container">
       <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+    </div> -->
+    <!-- /.내용 -->
+  <!-- </footer> -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -81,8 +109,32 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-  function fnMove(seq){
-          var offset = $("#move" + seq).offset();
-          $('html, body').animate({scrollTop : offset.top}, 400);
-      }
+  $.ajax({
+        url: 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage',
+        type: 'POST',
+        data: JSON.stringify({'rfid': 1012714626})
+    }).done((data, textStatus, jqXHR) => {
+        console.log(data);
+        var result = data['list']
+        // console.log(result[1]['date']);
+
+        var html = [], h = -1;
+        for(var rr, i = 0; rr = result[++i];){
+            html[++h] = '<tr><th scope="row">';
+            html[++h] = i
+            html[++h] = '</th><td>'
+            html[++h] = rr['date']
+            html[++h] = '</td><td>'
+            html[++h] = rr['point']
+            html[++h] = '</td><tr>'
+            // console.log(rr)
+        }
+        $('#table-body')[0].innerHTML = html.join('');
+
+    }).fail((jqXHR, textStatus, errorThrown) => {
+        console.log('실패');
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+    })
 </script>
