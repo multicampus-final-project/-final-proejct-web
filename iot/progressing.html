@@ -46,13 +46,27 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+			if(window.sessionStorage) {
+				sessionStorage.clear();
+			} 
+			else {
+				alert("세션을 사용할 수 없는 브라우저 입니다.");
+			}
+		});
+
   $('#end-btn').click(function(){
     $.ajax({
         url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/end',
         type: 'POST',
-        // data: JSON.stringify({'rfid': '1012714626'})
+        data: JSON.stringify({'rfid': '1012714626'})  // 바꿔야대
     }).done((data, textStatus, jqXHR) => {
-        location.href = 'end.html';
+        if (data['nickname'] != "") {   // 바꿔야대
+          // sessionStorage.setItem("userid", data["userid"]);
+          // sessionStorage.setItem("nickname", data["nickname"]);
+          // sessionStorage.setItem("total_point", data["total_point"]);
+          location.href = 'end.html';
+        }
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
         console.log(jqXHR);
