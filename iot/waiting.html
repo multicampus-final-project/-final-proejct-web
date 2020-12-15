@@ -29,9 +29,8 @@
   <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
     <div class="masthead-content">
       <div class="container">
-        <h2 class="masthead-heading mb-0">분리수거 시작</h2>
-        <a id="card-btn" class="btn btn-primary btn-xl rounded-pill mt-5" href="./waiting.html">회원카드로 시작</a>
-        <a id="start-btn" class="btn btn-primary btn-xl rounded-pill mt-5">QR코드로 시작</a>
+        <h1 class="masthead-heading mb-0">카드를 태그해주세요</h1>
+        <span id="fake" style="display: none;">zz</span>
       </div>
     </div>
   </header>
@@ -46,29 +45,37 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function() {
-        if(window.sessionStorage) {
-          sessionStorage.clear();
-        } 
-        else {
-          alert("세션을 사용할 수 없는 브라우저 입니다.");
-        }
-      });
-  
 
-  $('#start-btn').click(function(){
-    $.ajax({
-        url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/start',
-        type: 'GET',
-        // data: JSON.stringify({'rfid': '1012714626'})
-    }).done((data, textStatus, jqXHR) => {
-        location.href = 'progressing.html';
-    }).fail((jqXHR, textStatus, errorThrown) => {
-        console.log('실패');
-        console.log(jqXHR);
-        console.log(textStatus);
-        console.log(errorThrown);
-    })
-  });
+  setInterval(function() {
+    var API_URL = 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/start2';
+      $.ajax({
+            type: 'POST',
+            error: function(xhr, status, error){
+              console.log(error);
+            },
+            url: API_URL,
+            // async: false,
+            data: JSON.stringify({
+              "fakedata": $('#fake').text(),
+            }),
+            contentType: "application/json",
+            //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
+
+            success: function (data) {
+              if (data['login_status'] == 1) {
+                sessionStorage.setItem("rfid", data["rfid"]);
+                sessionStorage.setItem("nickname", data["nickname"]);
+                console.log("로그인된상태");
+                // console.log(data);
+                // console.log('성공!');
+                // alert("로그인 성공!");
+              }
+              else{
+                console.log("로그인 안!!!!!된상태");
+                console.log(data)
+              }
+            }
+          });
+  }, 2000);
   
 </script>
