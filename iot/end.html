@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>One Page Wonder - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/one-page-wonder.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+  <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
+    <div class="masthead-content">
+      <div class="container">
+        <h2 class="masthead-heading mb-0" id="nickname"></h2>
+        <h1 class="masthead-subheading mb-0" id="point"></h1>
+        <h6 class="masthead-subheading mb-0" id="total-p"></h6>
+        <!-- <a href="./iotbutton.html" class="btn btn-primary btn-xl rounded-pill mt-5">분리수거 완료</a> -->
+      </div>
+      
+    </div>
+  </header>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/result',
+        type: 'POST',
+        data: JSON.stringify({'rfid': '1012714626'})
+    }).done((data, textStatus, jqXHR) => {
+        const result = data
+
+        console.log(data);
+        $('#nickname').text(data[1]+' 님');
+        $('#point').text(data[0] +' p 적립되었습니다.');
+        $('#total-p').text('나의 포인트 '+data[2]+' p');
+    }).fail((jqXHR, textStatus, errorThrown) => {
+        console.log('실패');
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+    })
+</script>

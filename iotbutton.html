@@ -12,12 +12,14 @@
 <script>
 
     $.ajax({
-        url: ' https://gv2hikvk7k.execute-api.us-east-1.amazonaws.com/dev/iot',
-        type: 'GET'
+        // url: ' https://gv2hikvk7k.execute-api.us-east-1.amazonaws.com/dev/iot',
+        url: 'https://gv2hikvk7k.execute-api.us-east-1.amazonaws.com/user/end',
+        type: 'POST',
+        data: JSON.stringify({'status': 'stop'})
     }).done((data, textStatus, jqXHR) => {
         console.log('성공');
         console.log(data['body'])
-        $('#iot').text(data['body']['service-status']);
+        $('#iot').text(data['body']);
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
         console.log(jqXHR);
