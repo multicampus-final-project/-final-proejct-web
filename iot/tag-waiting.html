@@ -45,9 +45,10 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-
-  setInterval(function() {
-    var API_URL = 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/start2';
+  // RFID 찍히면 유효한지 검증 -> RFID값 뷰 테이블에 넣기 -> RFID값 받아와 세션 만들기
+  // 연결된 Lambda: rfid-data-to-view-table
+  (function() {
+    var API_URL = 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/tag-waiting';
       $.ajax({
             type: 'POST',
             error: function(xhr, status, error){
@@ -62,20 +63,16 @@
             //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
 
             success: function (data) {
-              if (data['login_status'] == 1) {
-                sessionStorage.setItem("rfid", data["rfid"]);
-                sessionStorage.setItem("nickname", data["nickname"]);
-                console.log("로그인된상태");
-                // console.log(data);
-                // console.log('성공!');
-                // alert("로그인 성공!");
-              }
-              else{
-                console.log("로그인 안!!!!!된상태");
-                console.log(data)
-              }
+              function redirect()
+              {
+                var delay = 4000; // time in milliseconds
+                setTimeout(function(){
+                  window.location = "http://127.0.0.1:5500/iot/login-progressing.html";
+                },delay);
+              };
+              redirect();
             }
           });
-  }, 2000);
+  }());
   
 </script>
