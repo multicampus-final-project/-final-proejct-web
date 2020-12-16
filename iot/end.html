@@ -48,6 +48,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+  // 세션의 정보들 뿌리기
     $.ajax({
         url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/result',
         type: 'POST',
@@ -56,9 +57,9 @@
         const result = data
 
         console.log(data);
-        $('#nickname').text(data[1]+' 님');
-        $('#point').text(data[0] +' p 적립되었습니다.');
-        $('#total-p').text('나의 포인트 '+data[2]+' p');
+        $('#nickname').text(sessionStorage.getItem('nickname')+' 님');
+        $('#point').text(sessionStorage.getItem('point') +' p 적립되었습니다.');
+        $('#total-p').text('총 보유 포인트 '+sessionStorage.getItem('total_point')+' p');
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
         console.log(jqXHR);

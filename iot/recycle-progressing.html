@@ -29,9 +29,9 @@
   <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
     <div class="masthead-content">
       <div class="container">
-        <h2 class="masthead-heading mb-0">분리수거 시작</h2>
-        <a id="card-btn" class="btn btn-primary btn-xl rounded-pill mt-5" href="./tag-waiting.html">회원카드로 시작</a>
-        <a id="start-btn" class="btn btn-primary btn-xl rounded-pill mt-5">QR코드로 시작</a>
+        <h1 class="masthead-heading mb-0">분리수거를 시작합니다</h1>
+        <h1>유리병을 카메라 앞에 놓아주세요.</h1>
+        <a id="end-btn" class="btn btn-primary btn-xl rounded-pill mt-5">분리수거 완료</a>
       </div>
     </div>
   </header>
@@ -46,25 +46,23 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-  // 세션 삭제
-  document.addEventListener("DOMContentLoaded", function() {
-        if(window.sessionStorage) {
-          sessionStorage.clear();
-        } 
-        else {
-          alert("세션을 사용할 수 없는 브라우저 입니다.");
-        }
-      });
-  
-  // QR로 로그인 버튼 클릭하면 iot에게 신호 보내 카메라 켜지게
-  // 연결된 Lambda: StartMQTT2
-  $('#start-btn').click(function(){
+  // 버튼 누르면 세션의 RFID값을 POST -> 닉네임, 적립된 포인트, 총 포인트 받아와 세션에 넣기
+  // 연결된 Lambda: end-get-user-info
+  var rfid = sessionStorage.getItem('rfid');
+  $('#end-btn').click(function(){
     $.ajax({
-        url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/start',
-        type: 'GET',
-        // data: JSON.stringify({'rfid': '1012714626'})
+        url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/end',
+        type: 'POST',
+        data: JSON.stringify({'rfid': rfid}),
+        contentType: "application/json",
     }).done((data, textStatus, jqXHR) => {
-        location.href = 'recycle-progressing.html';
+          console.log(data)
+          sessionStorage.setItem("nickname", data["nickname"]);
+          sessionStorage.setItem("point", data["point"]);
+          total_point = Number(data["point"]) + Number(data["total_point"]);
+          sessionStorage.setItem("total_point", total_point);
+          location.href = 'end.html';
+        
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
         console.log(jqXHR);
