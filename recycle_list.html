@@ -57,47 +57,22 @@
               <th scope="col">#</th>
               <th scope="col">분리수거 날짜</th>
               <th scope="col">적립 포인트</th>
-              <!-- <th scope="col">Handle</th> -->
             </tr>
           </thead>
           <tbody id="table-body">
-            <!-- <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr> -->
-            <!-- <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr> -->
           </tbody>
         </table>
-          <!-- <div class="col-lg-6 order-lg-1">
-            <div class="p-5">
-              <h2 class="display-4">Britney Jeom-rye</h2>
-              <p>영광이네요.</p>
-            </div>
-          </div> -->
       </div>
     </section>
 
 
   <!-- Footer -->
-  <!-- <footer class="py-5 bg-black"> -->
-    <!-- <div class="container">
+  <footer class="py-5 bg-black"> 
+    <div class="container">
       <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
-    </div> -->
-    <!-- /.내용 -->
-  <!-- </footer> -->
+    </div>
+     <!-- /.내용 -->
+  </footer>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -112,7 +87,7 @@
   $.ajax({
         url: 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage',
         type: 'POST',
-        data: JSON.stringify({'rfid': 1012714626})
+        data: JSON.stringify({'rfid': sessionStorage.getItem('rfid')})
     }).done((data, textStatus, jqXHR) => {
         console.log(data);
         var result = data['list']
