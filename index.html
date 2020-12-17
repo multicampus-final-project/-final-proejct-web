@@ -55,7 +55,7 @@
       <div class="container">
         <h1 class="masthead-heading mb-0" id="place_username"></h1>
         <h2 class="masthead-subheading mb-0" id="place_point"></h2>
-        <a href="./iotbutton.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
+        <a href="./recycle_list.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
       </div>
     </div>
   </header>
@@ -119,6 +119,12 @@
   var login_btn = document.getElementById("login_btn");
   var username_display = document.getElementById("place_username");
   var pointCheck_btn = document.getElementById("pointCheck_btn");
+
+  $('#logout_btn').on('click', function () {
+    sessionStorage.clear();
+    location.reload();
+    alert("로그아웃 완료");
+  });
 
   $('#logout_btn').on('click', function () {
     sessionStorage.clear();
