@@ -73,13 +73,13 @@
         console.log(errorThrown);
     })
 
-    // var timeleft = 12;
-    // var downloadTimer = setInterval(function(){
-    //   timeleft --;
-    //   document.getElementById("countdowntimer").textContent = timeleft;
-    //   if(timeleft <= 0){
-    //     clearInterval(downloadTimer);
-    //     // location.href = 'start.html';
-    //   }
-    // },1000);
+    var timeleft = 12;
+    var downloadTimer = setInterval(function(){
+      timeleft --;
+      document.getElementById("countdowntimer").textContent = timeleft;
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        location.href = 'start.html';
+      }
+    },1000);
 </script>
