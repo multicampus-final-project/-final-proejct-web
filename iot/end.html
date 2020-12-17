@@ -18,25 +18,31 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/iot-web-style.css" rel="stylesheet">
   <link href="../css/one-page-wonder.min.css" rel="stylesheet">
 
 </head>
 
 <body>
+  <div class="wrapper" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
+    <div class="content" style="line-height: 100px;">
+      <h1 class="display-5"><span class="display-3" id="nickname"></span> 님</h1>
+      <h1 class="display-5"><span class="display-3" id="point"></span>점 적립되었습니다</h1>
+      <h1 class="display-5">총 보유 포인트 <span class="display-3" id="total-p"></span>점</h1>
+      <p style="font-size:18px;"><span id="countdowntimer">12</span>초 후 자동 로그아웃</p>
+    </div>
+  </div>
 
-
-  <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
+  <!-- <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#FCCB74 0,#FD7951 100%)">
     <div class="masthead-content">
       <div class="container">
         <h2 class="masthead-heading mb-0" id="nickname"></h2>
         <h1 class="masthead-subheading mb-0" id="point"></h1>
         <h6 class="masthead-subheading mb-0" id="total-p"></h6>
-        <!-- <a href="./iotbutton.html" class="btn btn-primary btn-xl rounded-pill mt-5">분리수거 완료</a> -->
+        <p><span id="countdowntimer">10</span>초 후 자동 로그아웃</p>
       </div>
-      
     </div>
-  </header>
+  </header> -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
@@ -52,18 +58,28 @@
     $.ajax({
         url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/result',
         type: 'POST',
-        data: JSON.stringify({'rfid': '1012714626'})
+        data: JSON.stringify({'rfid': sessionStorage.getItem('rfid')})
     }).done((data, textStatus, jqXHR) => {
         const result = data
 
         console.log(data);
-        $('#nickname').text(sessionStorage.getItem('nickname')+' 님');
-        $('#point').text(sessionStorage.getItem('point') +' p 적립되었습니다.');
-        $('#total-p').text('총 보유 포인트 '+sessionStorage.getItem('total_point')+' p');
+        $('#nickname').text(sessionStorage.getItem('nickname'));
+        $('#point').text(sessionStorage.getItem('point'));
+        $('#total-p').text(sessionStorage.getItem('total_point'));
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
         console.log(jqXHR);
         console.log(textStatus);
         console.log(errorThrown);
     })
+
+    // var timeleft = 12;
+    // var downloadTimer = setInterval(function(){
+    //   timeleft --;
+    //   document.getElementById("countdowntimer").textContent = timeleft;
+    //   if(timeleft <= 0){
+    //     clearInterval(downloadTimer);
+    //     // location.href = 'start.html';
+    //   }
+    // },1000);
 </script>

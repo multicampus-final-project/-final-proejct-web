@@ -18,15 +18,21 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/iot-web-style.css" rel="stylesheet">
   <link href="../css/one-page-wonder.min.css" rel="stylesheet">
 
 </head>
 
 <body>
+  <div class="wrapper" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
+    <div class="content" style="line-height: 100px;">
+      <h1 class="display-3">분리수거를 시작합니다</h1>
+      <h1 class="display-5">유리병을 카메라 앞에 놓아주세요.</h1>
+      <a id="end-btn" class="btn btn-primary btn-xl rounded-pill mt-5">분리수거 완료</a>
+    </div>
+  </div>
 
-
-  <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
+  <!-- <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
     <div class="masthead-content">
       <div class="container">
         <h1 class="masthead-heading mb-0">분리수거를 시작합니다</h1>
@@ -34,7 +40,7 @@
         <a id="end-btn" class="btn btn-primary btn-xl rounded-pill mt-5">분리수거 완료</a>
       </div>
     </div>
-  </header>
+  </header> -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
@@ -48,13 +54,15 @@
 <script type="text/javascript">
   // 버튼 누르면 세션의 RFID값을 POST -> 닉네임, 적립된 포인트, 총 포인트 받아와 세션에 넣기
   // 연결된 Lambda: end-get-user-info
-  var rfid = sessionStorage.getItem('rfid');
+  var rfid = String(sessionStorage.getItem('rfid'));
+  console.log(typeof(rfid));
+  console.log(rfid)
   $('#end-btn').click(function(){
     $.ajax({
         url: 'https://gcjxk00ls1.execute-api.us-east-1.amazonaws.com/iot-user/end',
         type: 'POST',
         data: JSON.stringify({'rfid': rfid}),
-        contentType: "application/json",
+        contentType: "application/json"
     }).done((data, textStatus, jqXHR) => {
           console.log(data)
           sessionStorage.setItem("nickname", data["nickname"]);
@@ -62,6 +70,7 @@
           total_point = Number(data["point"]) + Number(data["total_point"]);
           sessionStorage.setItem("total_point", total_point);
           location.href = 'end.html';
+          
         
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.log('실패');
