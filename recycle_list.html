@@ -84,10 +84,13 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+  console.log(sessionStorage.getItem('userid'));
+
   $.ajax({
         url: 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage',
         type: 'POST',
-        data: JSON.stringify({'rfid': sessionStorage.getItem('rfid')})
+        data: JSON.stringify({'rfid': sessionStorage.getItem('userid')}),
+        contentType: "application/json", 
     }).done((data, textStatus, jqXHR) => {
         console.log(data);
         var result = data['list']
