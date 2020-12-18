@@ -66,13 +66,7 @@
     </section>
 
 
-  <!-- Footer -->
-  <footer class="py-5 bg-black"> 
-    <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
-    </div>
-     <!-- /.내용 -->
-  </footer>
+  
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -84,11 +78,11 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-  console.log(sessionStorage.getItem('userid'));
 
   $.ajax({
         url: 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage',
         type: 'POST',
+        // data: JSON.stringify({'rfid': '1012714626'}),
         data: JSON.stringify({'rfid': sessionStorage.getItem('userid')}),
         contentType: "application/json", 
     }).done((data, textStatus, jqXHR) => {
@@ -105,7 +99,6 @@
             html[++h] = '</td><td>'
             html[++h] = rr['point']
             html[++h] = '</td><tr>'
-            // console.log(rr)
         }
         $('#table-body')[0].innerHTML = html.join('');
 
@@ -116,3 +109,5 @@
         console.log(errorThrown);
     })
 </script>
+
+
