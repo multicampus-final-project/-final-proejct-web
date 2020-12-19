@@ -30,7 +30,12 @@ header.masthead .bg-circle-4{height:30rem;width:30rem;top:-5rem;right:35%} */
 .btn-secondary{background-color:#ff6a00;border-color:#ff6a00}
 .btn-secondary:active,.btn-secondary:focus,.btn-secondary:hover{background-color:#c50!important;border-color:#c50!important}
 .btn-secondary:focus{box-shadow:0 0 0 .2rem rgba(255,106,0,.5)}
-
+@font-face {
+    font-family: 'Jal_Onuel';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 
 /*background:linear-gradient(0deg,#ff6a00 0,#ee0979 100%);*/
 /*background:linear-gradient(0deg,#ee0979 0,#ff6a00 100%)*/

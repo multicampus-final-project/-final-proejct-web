@@ -41,7 +41,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/index.html">이리온 Bottle</a>
+      <a class="navbar-brand" href="/index.html"style="font-family: Jal_Onuel;">유리온</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -54,7 +54,7 @@
             <a class="nav-link" onclick="fnMove('2')" href="#">올바른 분리수거 방법</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="login_btn" href="/login.html">로그인</a>
+            <a class="nav-link" id="login_btn" href="./login.html">로그인</a>
             <a class="nav-link" id="logout_btn">로그아웃</a>
           </li>
         </ul>
@@ -109,8 +109,8 @@
   $.ajax({
         url: 'https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage',
         type: 'POST',
-        // data: JSON.stringify({'rfid': '1012714626'}),
-        data: JSON.stringify({'rfid': sessionStorage.getItem('userid')}),
+        data: JSON.stringify({'rfid': '1012714626'}),
+        // data: JSON.stringify({'rfid': sessionStorage.getItem('userid')}),
         contentType: "application/json", 
     }).done((data, textStatus, jqXHR) => {
         console.log(data);
@@ -141,7 +141,7 @@
     var login_btn = document.getElementById("login_btn");
 
     $('#logout_btn').on('click', function () {
-        // sessionStorage.clear();
+        sessionStorage.clear();
         alert("로그아웃 완료");
         location.href('./index.html');
     });
