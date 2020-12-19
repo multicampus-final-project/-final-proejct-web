@@ -114,7 +114,7 @@
         contentType: "application/json", 
     }).done((data, textStatus, jqXHR) => {
         console.log(data);
-        $('#place_point').text(data['nickname']+' 님 포인트 내역')
+        $('#place_point').text(data['nickname']+' 님 포인트 적립 내역')
 
         var result = data['list']
         // console.log(result[1]['date']);
@@ -145,5 +145,18 @@
         location.reload();
         alert("로그아웃 완료");
     });
+
+    (function () {
+
+    if (sessionStorage.getItem('userid')){
+      // 로그인 된 상태
+      // 로그인/아웃 버튼 교체, 닉네임 표시
+      logout_btn.style.display = "block";
+      login_btn.style.display = "none";
+    }
+    else {
+      username_display.innerHTML = "로그인 전 페이지";
+    };
+    }());
 
 </script>
