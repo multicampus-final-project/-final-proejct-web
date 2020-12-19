@@ -141,9 +141,9 @@
     var login_btn = document.getElementById("login_btn");
 
     $('#logout_btn').on('click', function () {
-        sessionStorage.clear();
-        location.reload();
+        // sessionStorage.clear();
         alert("로그아웃 완료");
+        location.href('./index.html');
     });
 
     (function () {
