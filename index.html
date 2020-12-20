@@ -25,6 +25,9 @@
     .rounded-circle {
       margin-bottom: 10px;
     }
+    .imageblock { 
+      max-width: 100%; height: auto; border:1px solid #eaeaea; padding: 0px; 
+    }
   </style>
 
 </head>
@@ -41,10 +44,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" onclick="fnMove('1')" type="button" href="#">이달의 분리수거왕</a>          
+              <a class="nav-link" onclick="fnMove('1')" type="button" >이달의 분리수거왕</a>          
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="fnMove('2')" href="#">올바른 분리수거 방법</a>
+            <a class="nav-link" onclick="fnMove('2')" >올바른 분리수거 방법</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="login_btn" href="/login.html">로그인</a>
@@ -74,19 +77,19 @@
         <div class="col-lg-6 order-lg-2">
           <div class="p-5" id="award_wrap">
             <div class="award_items">
-              <img class="img-fluid rounded-circle" src="img/01.jpg" alt="">
+              <img class="img-fluid rounded-circle imageblock" src="img/01.jpg" alt="">
               <h2 class="display-6 text-center" id="award_name1"></h2>
               <h4 class="display-6 text-center" id="award_points1"></h4>
               <p class="text-center">우리에게 허락된 외출은<br/>분리수거 뿐.</p>
             </div>
             <div class="award_items">
-              <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
+              <img class="img-fluid rounded-circle imageblock" src="img/02.jpg" alt="">
               <h2 class="display-6 text-center" id="award_name2"></h2>
               <h4 class="display-6 text-center" id="award_points2"></h4>
               <p class="text-center">아름다운 밤이에요~</p>
             </div>
             <div class="award_items">
-              <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
+              <img class="img-fluid rounded-circle imageblock" src="img/03.jpg" alt="">
               <h2 class="display-6 text-center" id="award_name3"></h2>
               <h4 class="display-6 text-center" id="award_points3"></h4>
               <p class="text-center">분리수거는 유리온!</p>
@@ -147,9 +150,9 @@
 
         success: function (data) {
           var awards = data['kings'];
-          $('#award_name1').text(awards[0][0]+ '님');
-          $('#award_name2').text(awards[1][0]+ '님');
-          $('#award_name3').text(awards[2][0]+ '님');
+          $('#award_name1').text(awards[0][0]+ ' 님');
+          $('#award_name2').text(awards[1][0]+ ' 님');
+          $('#award_name3').text(awards[2][0]+ ' 님');
           $('#award_points1').text(awards[0][1]+ 'p');
           $('#award_points2').text(awards[1][1]+ 'p');
           $('#award_points3').text(awards[2][1]+ 'p');
