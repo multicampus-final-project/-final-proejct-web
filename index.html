@@ -67,7 +67,7 @@
 
         <!-- <h1 id="before_login_header">이번 달 유리온에서는,<br><span class="display-1" id="bottle_amount"></span>개의 유리병이<br> 분리수거 되었습니다.</h1> -->
         <h1 class="masthead-heading mb-0" id="place_username"></h1>
-        <h2 class="masthead-subheading mb-0" id="place_point"></h2>
+        <h2 class="masthead-subheading mb-0" id="point"><span id="place_point"></span> point</h2>
         <a href="./recycle_list.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
       </div>
     </div>
@@ -145,15 +145,15 @@
           console.log(error);
         },
         url: API_URL,
-        async:false,
-        // data: JSON.stringify({
-        // 	"userid": $('#userId').val(),
-        // 	"password": $('#password').val()
-        // }),
-        // contentType: "application/json",
+        // async:false,
+        data: JSON.stringify({
+        	'rfid': sessionStorage.getItem('userid')
+        }),
+        contentType: "application/json",
         //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
 
         success: function (data) {
+          console.log(data)
           var awards = data['kings'];
           $('#award_name1').text(awards[0][0]+ ' 님');
           $('#award_name2').text(awards[1][0]+ ' 님');
@@ -164,6 +164,7 @@
 
           data_amount = data['data_amount'];
           $('#bottle_amount').text(data_amount[0]);
+          sessionStorage.setItem('total_point', data['total_point']);
         }
       });
       const obj = document.getElementById("bottle_amount_ani");
@@ -185,6 +186,7 @@
       login_btn.style.display = "none";
       pointCheck_btn.style.display = "inline-block";
       username_display.innerHTML = sessionStorage.getItem('username');
+      place_point.innerHTML = sessionStorage.getItem('total_point');
     }
     else {
       before_login_header.style.display = "block";
