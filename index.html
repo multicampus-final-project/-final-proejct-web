@@ -37,7 +37,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/index.html" style="font-family: Jal_Onuel;">유리온</a>
+      <a class="navbar-brand" href="/index.html" style="font-family: Jal_Onuel; font-size: 25px;">유리온</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -62,6 +62,10 @@
   <header class="masthead text-center text-white" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
     <div class="masthead-content">
       <div class="container">
+        <h1 class="masthead-heading mb-0" id="bottle_amount_ani" style="font-size: 180px;"></h1>
+        <h1 id="before_login_header">유리온에서는 <br>총 <span id="bottle_amount" style="text-decoration:underline"></span>개의 유리병을 수거했습니다</h1>
+
+        <!-- <h1 id="before_login_header">이번 달 유리온에서는,<br><span class="display-1" id="bottle_amount"></span>개의 유리병이<br> 분리수거 되었습니다.</h1> -->
         <h1 class="masthead-heading mb-0" id="place_username"></h1>
         <h2 class="masthead-subheading mb-0" id="place_point"></h2>
         <a href="./recycle_list.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
@@ -141,6 +145,7 @@
           console.log(error);
         },
         url: API_URL,
+        async:false,
         // data: JSON.stringify({
         // 	"userid": $('#userId').val(),
         // 	"password": $('#password').val()
@@ -156,8 +161,13 @@
           $('#award_points1').text(awards[0][1]+ 'p');
           $('#award_points2').text(awards[1][1]+ 'p');
           $('#award_points3').text(awards[2][1]+ 'p');
+
+          data_amount = data['data_amount'];
+          $('#bottle_amount').text(data_amount[0]);
         }
       });
+      const obj = document.getElementById("bottle_amount_ani");
+      animateValue(obj, 0, data_amount, 2000);
 		});
 
   $('#logout_btn').on('click', function () {
@@ -177,7 +187,9 @@
       username_display.innerHTML = sessionStorage.getItem('username');
     }
     else {
-      username_display.innerHTML = "로그인 전 페이지";
+      before_login_header.style.display = "block";
+      bottle_amount_ani.style.display = "block";
+
     };
   }());
 
@@ -185,4 +197,19 @@
           var offset = $("#move" + seq).offset();
           $('html, body').animate({scrollTop : offset.top}, 400);
       }
+
+  function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      obj.innerHTML = Math.floor(progress * (end - start) + start);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+  
+
 </script>

@@ -9,6 +9,13 @@
   margin-top: 60px;
 }
 
+#before_login_header {
+  display: none;
+  line-height: 80px;
+}
+#bottle_amount_ani {
+  display: none;
+}
 #award_wrap {
   display: flex;
   justify-content: space-between;
@@ -35,8 +42,9 @@
 }
 
 @font-face {
-  font-family: 'Jal_Onuel';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
+  font-family: "Jal_Onuel";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
