@@ -21,6 +21,12 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/one-page-wonder.min.css" rel="stylesheet">
 
+  <style>
+    .rounded-circle {
+      margin-bottom: 10px;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -35,7 +41,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" onclick="fnMove('1')" type="button" href="#">이달의 쓰레기 왕</a>          
+              <a class="nav-link" onclick="fnMove('1')" type="button" href="#">이달의 분리수거왕</a>          
           </li>
           <li class="nav-item">
             <a class="nav-link" onclick="fnMove('2')" href="#">올바른 분리수거 방법</a>
@@ -61,7 +67,7 @@
   </header>
 
 <section id="move1">
-  <h2 class="display-4 text-center">이달의 쓰레기왕</h2>
+  <h2 class="display-4 text-center" style="padding-top: 5.5rem;">이달의 분리수거왕</h2>
   <section>
     <div class="container" id="award-section">
       <div class="row align-items-center">
@@ -69,18 +75,21 @@
           <div class="p-5" id="award_wrap">
             <div class="award_items">
               <img class="img-fluid rounded-circle" src="img/01.jpg" alt="">
-              <h2 class="display-6 text-center" id="award_name">Britney Jeom-rye</h2>
-              <p class="text-center">영광이네요.</p>
+              <h2 class="display-6 text-center" id="award_name1"></h2>
+              <h4 class="display-6 text-center" id="award_points1"></h4>
+              <p class="text-center">우리에게 허락된 외출은<br/>분리수거 뿐.</p>
             </div>
             <div class="award_items">
               <img class="img-fluid rounded-circle" src="img/02.jpg" alt="">
-              <h2 class="display-6 text-center" id="award_name">Leonardo Ho-sup</h2>
-              <p class="text-center">Oh yeah.</p>
+              <h2 class="display-6 text-center" id="award_name2"></h2>
+              <h4 class="display-6 text-center" id="award_points2"></h4>
+              <p class="text-center">아름다운 밤이에요~</p>
             </div>
             <div class="award_items">
               <img class="img-fluid rounded-circle" src="img/03.jpg" alt="">
-              <h2 class="display-6 text-center" id="award_name">Jong-ah Won</h2>
-              <p class="text-center">영광이네요.</p>
+              <h2 class="display-6 text-center" id="award_name3"></h2>
+              <h4 class="display-6 text-center" id="award_points3"></h4>
+              <p class="text-center">분리수거는 유리온!</p>
             </div>
           </div>
         </div>  
@@ -115,10 +124,38 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+  var API_URL = "https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/index";
+
   var logout_btn = document.getElementById("logout_btn");
   var login_btn = document.getElementById("login_btn");
   var username_display = document.getElementById("place_username");
   var pointCheck_btn = document.getElementById("pointCheck_btn");
+
+  $(document).ready(function () {
+      $.ajax({
+        type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
+        error: function(xhr, status, error){
+          console.log(error);
+        },
+        url: API_URL,
+        // data: JSON.stringify({
+        // 	"userid": $('#userId').val(),
+        // 	"password": $('#password').val()
+        // }),
+        // contentType: "application/json",
+        //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
+
+        success: function (data) {
+          var awards = data['kings'];
+          $('#award_name1').text(awards[0][0]+ '님');
+          $('#award_name2').text(awards[1][0]+ '님');
+          $('#award_name3').text(awards[2][0]+ '님');
+          $('#award_points1').text(awards[0][1]+ 'p');
+          $('#award_points2').text(awards[1][1]+ 'p');
+          $('#award_points3').text(awards[2][1]+ 'p');
+        }
+      });
+		});
 
   $('#logout_btn').on('click', function () {
     sessionStorage.clear();
