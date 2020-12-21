@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>One Page Wonder - Start Bootstrap Template</title>
+  <title>유리온</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -74,8 +74,6 @@
       <div class="container">
         <h1 class="masthead-heading mb-0" id="bottle_amount_ani" style="font-size: 180px;"></h1>
         <h1 id="before_login_header">유리온에서는 <br>총 <span id="bottle_amount" style="text-decoration:underline"></span>개의 유리병을 수거했습니다</h1>
-
-        <!-- <h1 id="before_login_header">이번 달 유리온에서는,<br><span class="display-1" id="bottle_amount"></span>개의 유리병이<br> 분리수거 되었습니다.</h1> -->
         <h1 class="masthead-heading mb-0" id="place_username"></h1>
         <h2 class="masthead-subheading mb-0" id="point"><span id="place_point"></span> point</h2>
         <a href="./recycle_list.html" class="btn btn-primary btn-xl rounded-pill mt-5" id="pointCheck_btn">포인트 내역 조회</a>
@@ -117,7 +115,8 @@
   <section id="move2">
     <div class="container">
       <h2 class="display-4 text-center">올바른 분리수거 방법</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+      <img src="/img/recycle1.PNG">
+      <img src="/img/recycle2.PNG">
     </div>
   </section>
 </section>
@@ -126,7 +125,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-black">
     <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white small">Copyright &copy; multicampus Erion</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -149,36 +148,36 @@
   var pointCheck_btn = document.getElementById("pointCheck_btn");
 
   $(document).ready(function () {
-      $.ajax({
-        type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
-        error: function(xhr, status, error){
-          console.log(error);
-        },
-        url: API_URL,
-        // async:false,
-        data: JSON.stringify({
-        	'rfid': sessionStorage.getItem('userid')
-        }),
-        contentType: "application/json",
-        //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
+    $.ajax({
+      type: 'POST',   //API Gateway를 만들때, POST로 만들었으므로 타입을 POST로 지정
+      error: function(xhr, status, error){
+        console.log(error);
+      },
+      url: API_URL,
+      async:false,
+      data: JSON.stringify({
+        'rfid': sessionStorage.getItem('userid')
+      }),
+      contentType: "application/json",
+      //API Gateway 설정에서 매핑 템플릿을 설정하였으므로 그 이름과 동일하게 씀
 
-        success: function (data) {
-          console.log(data)
-          var awards = data['kings'];
-          $('#award_name1').text(awards[0][0]+ ' 님');
-          $('#award_name2').text(awards[1][0]+ ' 님');
-          $('#award_name3').text(awards[2][0]+ ' 님');
-          $('#award_points1').text(awards[0][1]+ 'p');
-          $('#award_points2').text(awards[1][1]+ 'p');
-          $('#award_points3').text(awards[2][1]+ 'p');
+      success: function (data) {
+        console.log(data)
+        var awards = data['kings'];
+        $('#award_name1').text(awards[0][0]+ ' 님');
+        $('#award_name2').text(awards[1][0]+ ' 님');
+        $('#award_name3').text(awards[2][0]+ ' 님');
+        $('#award_points1').text(awards[0][1]+ ' point');
+        $('#award_points2').text(awards[1][1]+ ' point');
+        $('#award_points3').text(awards[2][1]+ ' point');
 
-          data_amount = data['data_amount'];
-          $('#bottle_amount').text(data_amount[0]);
-          sessionStorage.setItem('total_point', data['total_point']);
-        }
-      });
-      const obj = document.getElementById("bottle_amount_ani");
-      animateValue(obj, 0, data_amount, 2000);
+        data_amount = data['data_amount'];
+        $('#bottle_amount').text(data_amount);
+        sessionStorage.setItem('total_point', data['total_point']);
+      }
+    });
+    const obj = document.getElementById("bottle_amount_ani");
+    animateValue(obj, 0, data_amount, 2000);
 		});
 
   $('#logout_btn').on('click', function () {
@@ -195,6 +194,7 @@
       logout_btn.style.display = "block";
       login_btn.style.display = "none";
       pointCheck_btn.style.display = "inline-block";
+      point.style.display = "block";
       username_display.innerHTML = sessionStorage.getItem('username');
       place_point.innerHTML = sessionStorage.getItem('total_point');
     }
