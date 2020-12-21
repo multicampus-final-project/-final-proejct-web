@@ -49,7 +49,7 @@
 
 <body>
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" style="padding-top:1.1rem; padding-bottom:1.1rem;">
     <div class="container">
       <a class="navbar-brand" href="/index.html" style="font-family: Jal_Onuel; font-size: 25px;">유리온</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,11 +120,11 @@
       var result = data['list']
       var html = [first], h = 0;
       for(var rr, i = 0; rr = result[++i];){
-          html[++h] = '<div class="row"><div class="cell" data-title="Full Name">';
+          html[++h] = '<div class="row"><div class="cell" data-title="Number">';
           html[++h] = i
-          html[++h] = '</div><div class="cell" data-title="Age">'
+          html[++h] = '</div><div class="cell" data-title="Date">'
           html[++h] = rr['date']
-          html[++h] = '</div><div class="cell" data-title="Job Title">'
+          html[++h] = '</div><div class="cell" data-title="">'
           html[++h] = rr['point']
           html[++h] = '</div></div>'
       };
