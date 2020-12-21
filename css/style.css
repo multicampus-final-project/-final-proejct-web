@@ -19,21 +19,23 @@
 #point {
   display: none;
 }
+#award-section {
+  margin-bottom: 100px;
+}
 #award_wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 800px;
-  margin-left: 95px;
 }
 
 .award_items {
-  margin-right: 30px;
+  margin-right: 80px;
   width: auto;
 }
 
-.award_items > h2 {
-  width: 250px;
+.award_items > p {
+  width: 300px;
 }
 
 #award_name {

@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>One Page Wonder - Start Bootstrap Template</title>
+  <title>유리온</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -105,7 +105,8 @@
   <section id="move2">
     <div class="container">
       <h2 class="display-4 text-center">올바른 분리수거 방법</h2>
-      <img src="">
+      <img src="/img/recycle1.PNG">
+      <img src="/img/recycle2.PNG">
     </div>
   </section>
 </section>
@@ -114,7 +115,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-black">
     <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white small">Copyright &copy; multicampus Erion</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -156,12 +157,12 @@
         $('#award_name1').text(awards[0][0]+ ' 님');
         $('#award_name2').text(awards[1][0]+ ' 님');
         $('#award_name3').text(awards[2][0]+ ' 님');
-        $('#award_points1').text(awards[0][1]+ 'p');
-        $('#award_points2').text(awards[1][1]+ 'p');
-        $('#award_points3').text(awards[2][1]+ 'p');
+        $('#award_points1').text(awards[0][1]+ ' point');
+        $('#award_points2').text(awards[1][1]+ ' point');
+        $('#award_points3').text(awards[2][1]+ ' point');
 
         data_amount = data['data_amount'];
-        $('#bottle_amount').text(data_amount[0]);
+        $('#bottle_amount').text(data_amount);
         sessionStorage.setItem('total_point', data['total_point']);
       }
     });
