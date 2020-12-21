@@ -32,36 +32,48 @@
     <link rel="stylesheet" type="text/css" href="table/css/util.css">
     <link rel="stylesheet" type="text/css" href="table/css/main.css">
   <!--===============================================================================================-->
+
+  <style>
+    @font-face {
+        font-family: 'Jal_Onuel';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    #place_point {
+        font-family: 'Jal_Onuel';
+        font-weight: 500!important;
+    }
+  </style>
 </head>
 
 <body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/index.html"style="font-family: Jal_Onuel;">유리온</a>
+      <a class="navbar-brand" href="/index.html" style="font-family: Jal_Onuel; font-size: 25px;">유리온</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link" onclick="fnMove('1')" type="button" href="./index.html">이달의 분리수거왕</a>          
+              <a class="nav-link" onclick="fnMove('1')" type="button" >이달의 분리수거왕</a>          
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="fnMove('2')" href="./index.html">올바른 분리수거 방법</a>
+            <a class="nav-link" onclick="fnMove('2')" >올바른 분리수거 방법</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="login_btn" href="/login.html">로그인</a>
             <a class="nav-link" id="logout_btn">로그아웃</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-  
   
   <div class="limiter" style="background:linear-gradient(0deg,#fccdae 0,#00bfb5 100%)">
-    <div class="container-table100">
+    <div class="container-table100" style="padding-top: 6rem;">
         <div class="wrap-table100">
           <h2 class="masthead-subheading mb-0" id="place_point" style="padding-bottom:10px;text-align:center; color: white; margin-bottom: 40px;"></h2><br>
           <h4 class="masthead-subheading mb-0" id="total-point" style="padding-bottom:10px;text-align:right; color: white; margin-bottom: 40px;"></h4><br>
@@ -101,7 +113,7 @@
   })
   .done(function(data) {
       console.log(data);
-      var first = '<div class="row header"><div class="cell">#</div><div class="cell">분리수거 날짜</div><div class="cell">적립 포인트</div></div>'
+      var first = '<div class="row header"><div class="cell title">#</div><div class="cell title">분리수거 날짜</div><div class="cell title">적립 포인트</div></div>'
       $('#place_point').text(data['nickname']+' 님 포인트 적립 내역');
       $('#total-point').text('총 '+data['total_point'] + 'p 보유');
 
@@ -125,14 +137,23 @@
   });
 
   var logout_btn = document.getElementById("logout_btn");
+  var login_btn = document.getElementById("login_btn");
 
   $('#logout_btn').on('click', function () {
-      sessionStorage.clear();
-      alert("로그아웃 완료");
-      location.href('./index.html');
+    sessionStorage.clear();
+    alert("로그아웃 완료");
+    location.href('./index.html');
   });
 
+  (function () {
 
+    if (sessionStorage.getItem('userid')){
+      // 로그인 된 상태
+      // 로그인/아웃 버튼 교체, 닉네임 표시
+      logout_btn.style.display = "block";
+      login_btn.style.display = "none";
+    }
+  }());
 </script>
 </body>
 
