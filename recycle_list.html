@@ -90,11 +90,12 @@
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
 <script type="text/javascript">
   var API_URL = "https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/point";
+
   // https://1q2yh6qcs0.execute-api.us-east-1.amazonaws.com/test/point
   $.ajax({
       url: API_URL, 
       // data: JSON.stringify({ "rfid": "1012714626" }),
-      data: JSON.stringify({"rfid": sessionStorage.getItem("rfid")}),
+      data: JSON.stringify({"rfid": sessionStorage.getItem("userid")}),
       type: "POST",
       contentType: "application/json"
   })
