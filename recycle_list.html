@@ -64,7 +64,9 @@
     <div class="container-table100">
         <div class="wrap-table100">
           <h2 class="masthead-subheading mb-0" id="place_point" style="padding-bottom:10px;text-align:center; color: white; margin-bottom: 40px;"></h2><br>
-                <div class="table" id="table-point"></div>
+          <h4 class="masthead-subheading mb-0" id="total-point" style="padding-bottom:10px;text-align:right; color: white; margin-bottom: 40px;"></h4><br>
+      
+          <div class="table" id="table-point"></div>
         </div>
     </div>
   </div>
@@ -91,15 +93,16 @@
   // https://1q2yh6qcs0.execute-api.us-east-1.amazonaws.com/test/point
   $.ajax({
       url: API_URL, 
-      data: JSON.stringify({ "rfid": "1012714626" }),
-      // data: JSON.stringify({"rfid": sessionStorage.getItem("rfid")}),
+      // data: JSON.stringify({ "rfid": "1012714626" }),
+      data: JSON.stringify({"rfid": sessionStorage.getItem("rfid")}),
       type: "POST",
       contentType: "application/json"
   })
   .done(function(data) {
       console.log(data);
       var first = '<div class="row header"><div class="cell">#</div><div class="cell">분리수거 날짜</div><div class="cell">적립 포인트</div></div>'
-      $('#place_point').text(data['nickname']+' 님 포인트 적립 내역')
+      $('#place_point').text(data['nickname']+' 님 포인트 적립 내역');
+      $('#total-point').text('총 '+data['total_point'] + 'p 보유');
 
       var result = data['list']
       var html = [first], h = 0;
