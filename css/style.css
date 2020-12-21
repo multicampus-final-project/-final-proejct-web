@@ -16,6 +16,9 @@
 #bottle_amount_ani {
   display: none;
 }
+#point {
+  display: none;
+}
 #award_wrap {
   display: flex;
   justify-content: space-between;
