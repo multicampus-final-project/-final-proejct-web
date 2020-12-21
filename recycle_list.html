@@ -87,30 +87,32 @@
 
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
 <script type="text/javascript">
+  var API_URL = "https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/point";
+  // https://1q2yh6qcs0.execute-api.us-east-1.amazonaws.com/test/point
   $.ajax({
-      url: "https://taz84axy7a.execute-api.us-east-1.amazonaws.com/dev/mypage", // 클라이언트가 요청을 보낼 서버의 URL 주소
-      data: JSON.stringify({ "rfid": "5857233129" }),
+      url: API_URL, 
+      data: JSON.stringify({ "rfid": "1012714626" }),
       // data: JSON.stringify({"rfid": sessionStorage.getItem("rfid")}),
-      type: "POST"
-      // contentType: "application/json"
+      type: "POST",
+      contentType: "application/json"
   })
   .done(function(data) {
       console.log(data);
-      // var first = '<div class="row header"><div class="cell">#</div><div class="cell">분리수거 날짜</div><div class="cell">적립 포인트</div></div>'
-      // $('#place_point').text(data['nickname']+' 님 포인트 적립 내역')
+      var first = '<div class="row header"><div class="cell">#</div><div class="cell">분리수거 날짜</div><div class="cell">적립 포인트</div></div>'
+      $('#place_point').text(data['nickname']+' 님 포인트 적립 내역')
 
-      // var result = data['list']
-      // var html = [first], h = 0;
-      // for(var rr, i = 0; rr = result[++i];){
-      //     html[++h] = '<div class="row"><div class="cell" data-title="Full Name">';
-      //     html[++h] = i
-      //     html[++h] = '</div><div class="cell" data-title="Age">'
-      //     html[++h] = rr['date']
-      //     html[++h] = '</div><div class="cell" data-title="Job Title">'
-      //     html[++h] = rr['point']
-      //     html[++h] = '</div></div>'
-      // };
-      // $('#table-point')[0].innerHTML = html.join('');
+      var result = data['list']
+      var html = [first], h = 0;
+      for(var rr, i = 0; rr = result[++i];){
+          html[++h] = '<div class="row"><div class="cell" data-title="Full Name">';
+          html[++h] = i
+          html[++h] = '</div><div class="cell" data-title="Age">'
+          html[++h] = rr['date']
+          html[++h] = '</div><div class="cell" data-title="Job Title">'
+          html[++h] = rr['point']
+          html[++h] = '</div></div>'
+      };
+      $('#table-point')[0].innerHTML = html.join('');
   })
   .fail(function(xhr, status, errorThrown) {
       console.log('오류: '+ errorThrown);
@@ -118,7 +120,6 @@
       console.log(xhr);
   });
 
-  
   var logout_btn = document.getElementById("logout_btn");
 
   $('#logout_btn').on('click', function () {
