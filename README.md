@@ -70,12 +70,12 @@
 
 ▪ API Gateway는 AWS Lambda를 호출하여 Web↔Lambda의 중계기 역할 
 
-| 리소스  | 메소드 | Lambda 함수           | 역할                                                         |
-| ------- | ------ | --------------------- | ------------------------------------------------------------ |
-| /index  | POST   | user-web-index-page   | 로그인 여부 파악하여 인덱스 페이지  콘텐츠를 DB로부터 가져오고 결과를 보냄 |
-| /point  | POST   | PointListAPI          | 로그인된 사용자의 ID 값을  이용하여 DB로부터 포인트 적립 내역을 가져오고 결과를 보냄 |
-| /login  | POST   | get-user-info-from-db | 로그인 - Ajax로 받은 로그인  폼 데이터를 DB에 검색하여 로그인 성/패 결정하고 결과를 보냄 |
-| /signup | POST   | put-user-info-to-db   | 회원가입 - Ajax로 받은  회원가입 폼 데이터를 DB에 저장       |
+| 리소스                           | 메소드 | Lambda 함수           | 역할                                                         |
+| -------------------------------- | ------ | --------------------- | ------------------------------------------------------------ |
+| [/index](RESTfulAPI.md#/index)   | POST   | user-web-index-page   | 로그인 여부 파악하여 인덱스 페이지  콘텐츠를 DB로부터 가져오고 결과를 보냄 |
+| [/point](RESTfulAPI.md#/point)   | POST   | PointListAPI          | 로그인된 사용자의 ID 값을  이용하여 DB로부터 포인트 적립 내역을 가져오고 결과를 보냄 |
+| [/login](RESTfulAPI.md#/login)   | POST   | get-user-info-from-db | 로그인 - Ajax로 받은 로그인  폼 데이터를 DB에 검색하여 로그인 성/패 결정하고 결과를 보냄 |
+| [/signup](RESTfulAPI.md#/signup) | POST   | put-user-info-to-db   | 회원가입 - Ajax로 받은  회원가입 폼 데이터를 DB에 저장       |
 
 
 
@@ -101,13 +101,13 @@
 
 ▪ S3 버킷 업로드에 의해 트리거 된 Lambda는 S3 버킷의 이미지 파일명에서 데이터를 추출하여 DB에 저장하고 사용자의 보유 포인트 정보를 받아와 웹으로 전송
 
-| 리소스            | 메소드 | Lambda 함수             | 역할                                                         |
-| ----------------- | ------ | ----------------------- | ------------------------------------------------------------ |
-| start-signal      | GET    | StartMQTT2              | 라즈베리 파이에 분리수거 시작 신호  보내기(for 기기 음성 출력) |
-| tag-waiting       | POST   | rfid-data-to-view-table | RFID 리더기에 카드가 태그되면  유효한지 검증 후, 값을 임시 테이블에 저장 |
-| login-progressing | POST   | start-get-rfid          | 빈 요청 보내고 임시 테이블의  RFID값 받아와서 세션 생성      |
-| end               | POST   | end-get-user-info       | 분리수거 종료 버튼 클릭시 세션의  RFID값을 보내 닉네임, 적립된 포인트, 총 포인트 받아오기 |
-| end-signal        | POST   | CloudtoDeviceTest       | 라즈베리 파이에 분리수거 종료 신호  보내기(for 기기 음성 출력) |
+| 리소스                                                 | 메소드 | Lambda 함수             | 역할                                                         |
+| ------------------------------------------------------ | ------ | ----------------------- | ------------------------------------------------------------ |
+| [/start-signal](RESTfulAPI.md#/start)                  | GET    | StartMQTT2              | 라즈베리 파이에 분리수거 시작 신호  보내기(for 기기 음성 출력) |
+| [/tag-waiting](RESTfulAPI.md#/tag-waiting)             | POST   | rfid-data-to-view-table | RFID 리더기에 카드가 태그되면  유효한지 검증 후, 값을 임시 테이블에 저장 |
+| [/login-progressing](RESTfulAPI.md#/login-progressing) | POST   | start-get-rfid          | 빈 요청 보내고 임시 테이블의  RFID값 받아와서 세션 생성      |
+| [/end](RESTfulAPI.md#/end)                             | POST   | end-get-user-info       | 분리수거 종료 버튼 클릭시 세션의  RFID값을 보내 닉네임, 적립된 포인트, 총 포인트 받아오기 |
+| [/end-signal](RESTfulAPI.md#/end-signal)               | POST   | CloudtoDeviceTest       | 라즈베리 파이에 분리수거 종료 신호  보내기(for 기기 음성 출력) |
 
 
 
