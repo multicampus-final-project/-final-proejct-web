@@ -72,7 +72,7 @@
 
 | 리소스                           | 메소드 | Lambda 함수           | 역할                                                         |
 | -------------------------------- | ------ | --------------------- | ------------------------------------------------------------ |
-| [/index](RESTfulAPI.md#/index)   | POST   | user-web-index-page   | 로그인 여부 파악하여 인덱스 페이지  콘텐츠를 DB로부터 가져오고 결과를 보냄 |
+| [/index](RESTfulAPI.md##/index)  | POST   | user-web-index-page   | 로그인 여부 파악하여 인덱스 페이지  콘텐츠를 DB로부터 가져오고 결과를 보냄 |
 | [/point](RESTfulAPI.md#/point)   | POST   | PointListAPI          | 로그인된 사용자의 ID 값을  이용하여 DB로부터 포인트 적립 내역을 가져오고 결과를 보냄 |
 | [/login](RESTfulAPI.md#/login)   | POST   | get-user-info-from-db | 로그인 - Ajax로 받은 로그인  폼 데이터를 DB에 검색하여 로그인 성/패 결정하고 결과를 보냄 |
 | [/signup](RESTfulAPI.md#/signup) | POST   | put-user-info-to-db   | 회원가입 - Ajax로 받은  회원가입 폼 데이터를 DB에 저장       |
